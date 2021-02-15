@@ -53,15 +53,15 @@ Y = data.target
 X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state=42)
 
 for eta, n in [(eta, n) for eta in [.1, .3, .5, .7, .9] for n in (10, 15, 20)]:
-    # Visualizing the difference of scores of the perceptron with different options
     pr = Perceptron(eta=eta, n=n)
     pr.fit(X_train, y_train)
     score = pr.score(X_test, y_test)
-    print(f'Perceptron(eta={eta}, n={n}). Score: {score}.')
+    errors = pr.errors
+
+    # Visualizing the difference of scores of the perceptron with different options
+    plt.figure(f"Perceptron(eta={eta}, n={n}). Score: {score}.")
 
     # Visualizing the dependence of amount of the iterations on the amount of the errors
-    errors = pr.errors
-    plt.figure(f"Perceptron(eta={eta}, n={n}). Score: {score}.")
     plt.xlabel("Amount of iterations")
     plt.ylabel("Amount of errors")
     plt.xticks(range(1, n + 1), [str(i) for i in range(1, n + 1)])
