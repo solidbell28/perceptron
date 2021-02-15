@@ -2,17 +2,21 @@ import numpy as np
 
 
 class Perceptron:
+    '''The class representing a perceptron model'''
 
     def __init__(self, eta=0.01, n=10):
+        # n - amount of iterations
         if (eta <= 0) or (eta >= 1):
             raise ValueError("Eta must be greater than 0 and less than 1")
         self.eta = eta
         self.n = n
 
     def fit(self, X, y):
+        """Model training function"""
         self.coefs = np.zeros(X.shape[1])
         self.interception = 0
         self.errors = []
+        # We will use the 'errors' list in future for some data visualization
         for _ in range(self.n):
             errors = 0.0
             for xi, target in zip(X, y):
@@ -22,11 +26,9 @@ class Perceptron:
                 errors += update
             self.errors.append(errors)
 
-    def net_input(self, X):
-        return np.dot(X, self.coefs) + self.interception
-
     def predict(self, X):
-        result = self.net_input(X)
+        """Result prediction function"""
+        result = np.dot(X, self.coefs) + self.interception
         if result < -2:
             return 0
         elif result > 2:
@@ -35,6 +37,7 @@ class Perceptron:
             return 1
 
     def score(self, X, y):
+        """The function of evaluating the result of work of the model"""
         results = np.array([self.predict(xi) for xi in X])
         return np.sum(results == y) / len(y)
 
