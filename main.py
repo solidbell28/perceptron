@@ -13,6 +13,7 @@ class Perceptron:
 
     def fit(self, X, y):
         """Model training function"""
+
         self.coefs = np.zeros(X.shape[1])
         self.interception = 0
         self.errors = []
@@ -28,6 +29,7 @@ class Perceptron:
 
     def predict(self, X):
         """Result prediction function"""
+
         result = np.dot(X, self.coefs) + self.interception
         if result < -2:
             return 0
@@ -38,6 +40,7 @@ class Perceptron:
 
     def score(self, X, y):
         """The function of evaluating the result of work of the model"""
+
         results = np.array([self.predict(xi) for xi in X])
         return np.sum(results == y) / len(y)
 
