@@ -61,6 +61,7 @@ for eta, n in [(eta, n) for eta in [.1, .3, .5, .7, .9] for n in (10, 15, 20)]:
 
     # Visualizing the dependence of amount of the iterations on the amount of the errors
     errors = pr.errors
+    plt.figure(f"Perceptron(eta={eta}, n={n}). Score: {score}.")
     plt.xlabel("Amount of iterations")
     plt.ylabel("Amount of errors")
     plt.xticks(range(1, n + 1), [str(i) for i in range(1, n + 1)])
